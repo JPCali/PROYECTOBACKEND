@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "service",
         foreignKey: "service_id",
       });
-      appointments.belongsTo(models.user, {
+      appointments.belongsTo(models.users, {
         as: "user",
         foreignKey: "user_id",
       });
