@@ -29,10 +29,7 @@ module.exports = {
           key: "id",
         },
       },
-      description: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -41,6 +38,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+    });
+
+    await queryInterface.addConstraint("appointments", {
+      fields: ["appointments_date"],
+      type: "unique",
+      name: "appointments_date_unique",
     });
   },
   async down(queryInterface, Sequelize) {
