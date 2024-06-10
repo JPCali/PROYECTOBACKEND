@@ -15,6 +15,13 @@ app.get("/api/healthy", (req, res) => {
   });
 });
 
+app.post(`/api/auth/register`, (req, res) => {
+  res.status(201).json({
+    success: true,
+    message: "usuario registrado con exito",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });

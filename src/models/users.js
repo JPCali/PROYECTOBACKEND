@@ -54,13 +54,6 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           isEmail: true,
           notEmpty: true,
-
-          isUnique: async (email) => {
-            const user = await users.findOne({ where: { email } });
-            if (user) {
-              throw new Error("invalid email");
-            }
-          },
         },
       },
     },
