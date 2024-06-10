@@ -22,6 +22,13 @@ app.post(`/api/auth/register`, (req, res) => {
   });
 });
 
+app.post(`/api/auth/login`, (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "usuario logueado con exito",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
