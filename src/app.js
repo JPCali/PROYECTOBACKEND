@@ -8,26 +8,16 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
 
-app.get("/api/healthy", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "My APP server is healthy",
-  });
-});
+app.get(
+  "/api/healthy",
 
-app.post(`/api/auth/register`, (req, res) => {
-  res.status(201).json({
-    success: true,
-    message: "usuario registrado con exito",
-  });
-});
-
-app.post(`/api/auth/login`, (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "usuario logueado con exito",
-  });
-});
+  (req, res) => {
+    res.status(200).json({
+      success: true,
+      message: "My APP server is healthy",
+    });
+  }
+);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
