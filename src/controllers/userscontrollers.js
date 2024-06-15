@@ -1,29 +1,27 @@
 const { User } = require("../models");
-const bcrypt = require("bcryt");
+const bcrypt = require("bcrypt");
 
 const userController = {};
 
-//OBTENER TODOS LOS USUARIOS
 userController.getAll = async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes: { exclude: ["createAd", "uptadeAd", "password"] },
+      attributes: { exclude: ["createAt", "uptadeAt", "password"] },
     });
     res.status(200).json({
       success: true,
-      message: "se muestran todos los usuarios",
+      message: "ver todos los usuarios",
       data: users,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "error, no se pudieron obtener los usuarios",
+      message: "error al ver usuarios",
       error: error.message,
     });
   }
 };
 
-//LEVANTAR UN USUARIO POR userId
 userController.getUserProfile = async (req, res) => {
   const userId = req.tokenData.userId;
 
@@ -45,8 +43,7 @@ userController.getUserProfile = async (req, res) => {
     });
   }
 };
-
-//ACTUALIZAR UN USUARIO POR userId
+//CAMBIAR DATOS DE USUARIO
 userController.updateUserProfile = async (req, res) => {
   const userId = req.tokenData.userId;
   const { password, role_id, ...restUserData } = req.body;
@@ -57,7 +54,7 @@ userController.updateUserProfile = async (req, res) => {
     if (!userToUpdate) {
       return res.status(404).json({
         success: true,
-        message: "usuario no encontraod",
+        message: "User not found",
       });
     }
 
@@ -75,18 +72,17 @@ userController.updateUserProfile = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "usuario actualizado correctamente",
+      message: "Usuario actualizado correctamente",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "error al actualizar usuario",
+      message: "Error actulizando usuario",
       error: error.message,
     });
   }
 };
-
-//ELIMINAR UN USUARIO POR userId
+//BORRAR USUARIO
 userController.delete = async (req, res) => {
   const userId = req.params.id;
 
@@ -106,12 +102,12 @@ userController.delete = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Usuario eliminado",
+      message: "Usuario eliminado correctamente",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error al eliminar",
+      message: "Error al eliminar usuario",
       error: error.message,
     });
   }

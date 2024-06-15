@@ -4,12 +4,11 @@
     "password": "Incorrec74",
     "database": "proyecto_backend",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "port": 3306
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "Incorrec74",
+    "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"

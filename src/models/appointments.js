@@ -1,29 +1,28 @@
 "use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
-  class appointments extends Model {
+  class Appointment extends Model {
     static associate(models) {
-      appointments.belongsTo(models.services, {
-        as: "service",
-        foreignKey: "service_id",
-      });
-      appointments.belongsTo(models.users, {
-        as: "user",
+      Appointment.belongsTo(models.User, {
+        as: "users",
         foreignKey: "user_id",
+      });
+      Appointment.belongsTo(models.Service, {
+        as: "services",
+        foreignKey: "service_id",
       });
     }
   }
-  appointments.init(
+  Appointment.init(
     {
-      appointments_date: DataTypes.DATE,
-      user_id: DataTypes.INTEGER,
-      service_id: DataTypes.INTEGER,
+      appointment_date: DataTypes.DATE,
     },
     {
       sequelize,
-      modelName: "appointments",
+      modelName: "Appointment",
       tableName: "appointments",
     }
   );
-  return appointments;
+  return Appointment;
 };

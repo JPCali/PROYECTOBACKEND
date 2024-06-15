@@ -1,4 +1,5 @@
-/node_modules
+# ARCHIVOS QUE NO SE SUBEN
 
+
+/node_modules
 .env
-config.json

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
       "services",
       [
@@ -18,7 +18,7 @@ module.exports = {
           id: 2,
           service_name: "Tatuajes del catálogo",
           description:
-            "Ofrecemos la realización de tatuajes basados en diseños predefinidos en nuestro catálogo.Los clientes pueden elegir entre una variedad de opciones estilizadas y probadas",
+            "Ofrecemos la realización de tatuajes basados en diseños predefinidos en nuestro catálogo. Los clientes pueden elegir entre una variedad de opciones estilizadas y probadas.",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -34,7 +34,7 @@ module.exports = {
           id: 4,
           service_name: "Colocación de piercings y dilatadores",
           description:
-            "Ofrecemos servicios profesionales para la colocación de piercings y dilatadores. Nuestro equipo garantiza procedimientos seguros y estilos variados para satisfacer las preferencias individuales de nuestros clientes",
+            "Ofrecemos servicios profesionales para la colocación de piercings y dilatadores. Nuestro equipo garantiza procedimientos seguros y estilos variados para satisfacer las preferencias individuales de nuestros clientes.",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -50,6 +50,7 @@ module.exports = {
       {}
     );
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete("services", null, {});
   },

@@ -1,68 +1,33 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class users extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class User extends Model {
+    
     static associate(models) {
-      // define association here
-      users.belongsTo(models.roles, {
-        as: "roles",
-        foreignKey: "role_id",
+      User.belongsTo(models.Role,{
+        as:"role",
+        foreignKey:"role_id"
       });
+      User.hasMany(models.Appointment,{
+        as:"appointments",
+        foreignKey: "user_id",
+      })
     }
   }
-  users.init(
-    {
-      first_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-
-      last_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      password_hash: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      role_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "roles",
-          key: "id",
-        },
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: true,
-          notEmpty: true,
-        },
-      },
-    },
-
-    {
-      sequelize,
-      modelName: "users",
-      tableName: "users",
-    }
-  );
-  return users;
+  User.init({
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
+    email:DataTypes.STRING,
+    password:DataTypes.STRING,
+    is_active:DataTypes.BOOLEAN,
+    role_id:DataTypes.INTEGER,
+  }, {
+    sequelize,
+    modelName: 'User',
+    tableName: "users",
+    
+  });
+  return User;
 };
