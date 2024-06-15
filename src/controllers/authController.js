@@ -1,15 +1,23 @@
 const authController = {};
+const { User, Role } = require("../models");
 
 // REGISTRO DE USUARIOS
-authController.register = (req, res) => {
-  console.log(req.body);
+authController.create = async (req, res) => {
+  const { first_name, last_name, email, password } = req.body;
+  // TRATAMIENTO DE DATOS
+  // tolowercase
+  await User.create({
+    first_name: first_name.toLowerCase(),
+    last_name: last_name.toLowerCase(),
+    email: email.toLowerCase(),
+    password_hash: 1234,
+  });
+
   res.status(201).json({
     success: true,
     message: "usuario registrado con exito",
   });
 };
-// TRATAMIENTO DE DATOS
-// tolowercase
 
 // LOGIN DE USUARIOS
 app.post(`/api/login`, (req, res) => {
