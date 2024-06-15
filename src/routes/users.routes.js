@@ -1,12 +1,12 @@
 const express = require("express");
+const router = express.Router();
+const control = require("../controllers/userController");
+const auth = require("../middlewares/auth");
+const authorize = require("../middlewares/authorize");
 
-// ENDPOINTS USUARIOS GET ALL
+router.get("/", control.getAll);
+router.get("/profile", auth, control.getUserProfile);
+router.put("/profile,", auth, control.updateUserProfile);
+router.delete("/:id", authorize("super-admin"), auth, control.delete);
 
-app.get("/api/users", async (req, res) => {
-  const users = await users.findAll();
-  res.status(200).json({
-    success: true,
-    message: "usuarios obtenidos con exito",
-    data: users,
-  });
-});
+module.exports = router;
