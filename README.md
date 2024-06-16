@@ -1,3 +1,5 @@
+![alt text](image-1.png)
+
 # API REST para Gestión de Citas de un Estudio de Tatuajes
 
 ## Descripción
@@ -11,6 +13,8 @@ El proyecto consiste en desarrollar una API RESTful para la gestión de citas de
 - Gestión de Usuarios
 - Edición de Perfil de Usuario
 - Registro y Login de Usuarios
+
+![alt text](image.png)
 
 ## Endpoints principales
 
