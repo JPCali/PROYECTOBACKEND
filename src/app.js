@@ -16,7 +16,7 @@ app.use("/api", apiRoutes);
 sequelize
   .authenticate()
   .then(() => {
-    console.log(" 🛢️  ✅  Base de datos verificada");
+    console.log(" 🗃️  ✅  Base de datos verificada");
 
     app.listen(PORT, () => {
       console.log(` 🦻 ✅ Server listening on port: ${PORT}`);

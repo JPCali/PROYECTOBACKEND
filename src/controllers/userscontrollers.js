@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 const userController = {};
 
+//SOLICITAR TODOS LOS USUARIOS
 userController.getAll = async (req, res) => {
   try {
     const users = await User.findAll({
@@ -22,6 +23,7 @@ userController.getAll = async (req, res) => {
   }
 };
 
+//SOLICITAR USUARIO POR ID
 userController.getUserProfile = async (req, res) => {
   const userId = req.tokenData.userId;
 
@@ -54,7 +56,7 @@ userController.updateUserProfile = async (req, res) => {
     if (!userToUpdate) {
       return res.status(404).json({
         success: true,
-        message: "User not found",
+        message: "User no encontrado",
       });
     }
 
