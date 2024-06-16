@@ -13,19 +13,15 @@ const PORT = process.env.PORT || 4000;
 
 app.use("/api", apiRoutes);
 
-
-
-
-
 sequelize
   .authenticate()
   .then(() => {
-    console.log("🛢️  Base de datos verificada");
+    console.log(" 🛢️  ✅  Base de datos verificada");
 
     app.listen(PORT, () => {
-      console.log(`🚀 Server listening on port: ${PORT}`);
+      console.log(` 🦻 ✅ Server listening on port: ${PORT}`);
     });
   })
   .catch(() => {
-    console.error("Error verificacion de Base de datos");
+    console.error("☠️🤬Error verificacion de Base de datos");
   });

@@ -77,7 +77,7 @@ userController.updateUserProfile = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error actulizando usuario",
+      message: "Error actualizando usuario",
       error: error.message,
     });
   }
