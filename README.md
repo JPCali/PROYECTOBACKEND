@@ -12,8 +12,6 @@ El proyecto consiste en desarrollar una API RESTful para la gestión de citas de
 - Edición de Perfil de Usuario
 - Registro y Login de Usuarios
 
-![alt text](image.png)
-
 ## Endpoints principales
 
 ### Autenticación
@@ -52,4 +50,8 @@ El proyecto consiste en desarrollar una API RESTful para la gestión de citas de
 
 ## Tecnologías
 
-- Lenguaje: **JavaScript**.
+<a id="stack">Stack</a>
+
+- ORM: ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+- Language: ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+- Framework: ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
