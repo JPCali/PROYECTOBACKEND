@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const authController = {};
 authController.register = async (req, res) => {
   try {
-    const { first_name, last_name, email, password, role_id } = req.body;
+    const { first_name, last_name, email, password } = req.body; //SE ELIMINA ROLE_ID DE LOS DATOS DE REGISTRO
     // TRATAMIENTO DE DATOS
     // tolowercase
     if (!first_name || !last_name || !email || !password || role_id) {

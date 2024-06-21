@@ -14,7 +14,7 @@ El proyecto consiste en desarrollar una API RESTful para la gestión de citas de
 - Edición de Perfil de Usuario
 - Registro y Login de Usuarios
 
-![alt text](image.png)
+![     ](image.png)
 
 ## Endpoints principales
 

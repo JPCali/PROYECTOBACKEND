@@ -2,12 +2,13 @@ const { Appointment, User, Service } = require("../models");
 
 const appointmentController = {};
 
-//REGISTRO DE CITAS
+//REGISTRO DE CITAS ---------------- SE PASA FUNCION PARA USUARIO AUTENTICADO ----------------
 appointmentController.create = async (req, res) => {
-  const { id, appointment_date, user_id, service_id } = req.body;
+  const { appointment_date, service_id } = req.body;
+  const user_id = req.tokenData.userId;
 
   try {
-    if (!id || !appointment_date || !user_id || !service_id) {
+    if (!appointment_date || !user_id || !service_id) {
       return res.status(400).json({
         success: true,
         message: "Campos incompletos o incorrectos",
@@ -15,7 +16,6 @@ appointmentController.create = async (req, res) => {
     }
 
     await Appointment.create({
-      id,
       appointment_date,
       user_id,
       service_id,
@@ -28,7 +28,7 @@ appointmentController.create = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error al crear la cita",
+      message: "la cita no pudo ser creada, intentelo nuevamente",
       error: error.message,
     });
   }
@@ -36,14 +36,29 @@ appointmentController.create = async (req, res) => {
 
 // MODIFICACION DE CITAS
 appointmentController.update = async (req, res) => {
-  console.log("update");
   const appointmentId = req.params.id;
   const appointmentData = req.body;
+  const user_id = req.tokenData.userId;
 
   try {
+    const appointment = await Appointment.findByPk(appointmentId);
+    if (!appointment) {
+      return res.status(404).json({
+        success: true,
+        message: "No se encontro cita",
+      });
+    }
+    if (appointment.user_id !== user_id) {
+      return res.status(404).json({
+        success: true,
+        message: "Unauthorized access",
+      });
+    }
+
     await Appointment.update(appointmentData, {
       where: {
         id: appointmentId,
+        user_id: user_id,
       },
     });
 
@@ -63,6 +78,7 @@ appointmentController.update = async (req, res) => {
 //  BUSCAR LA CITA POR ID
 appointmentController.getById = async (req, res) => {
   const appointmentId = req.params.id;
+  const user_id = req.tokenData.userId;
 
   try {
     const appointment = await Appointment.findByPk(appointmentId, {
@@ -70,7 +86,7 @@ appointmentController.getById = async (req, res) => {
         { model: User, as: "users" },
         { model: Service, as: "services" },
       ],
-      attributes: { exclude: ["createdAt", "updatedAt", "author_id"] },
+      attributes: { exclude: ["createdAt", "updatedAt", "service_id"] },
     });
     if (!appointment) {
       return res.status(404).json({
@@ -79,10 +95,17 @@ appointmentController.getById = async (req, res) => {
       });
     }
 
+    if (!appointment) {
+      return res.status(404).json({
+        success: true,
+        message: "Unauthorized access",
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: "Esta es su cita",
-      data: book,
+      data: appointment,
     });
   } catch (error) {
     res.status(500).json({
@@ -93,9 +116,13 @@ appointmentController.getById = async (req, res) => {
   }
 };
 
+//  BUSCAR TODAS LAS CITAS DEL USUARIO
 appointmentController.getAll = async (req, res) => {
+  const user_id = req.tokenData.userId;
   try {
-    const appointments = await Appointment.findAll();
+    const appointments = await Appointment.findAll({
+      where: { user_id },
+    });
 
     res.status(200).json({
       success: true,
