@@ -95,7 +95,7 @@ appointmentController.getById = async (req, res) => {
       });
     }
 
-    if (!appointment) {
+    if (!appointment.user_id !== user_id) {
       return res.status(404).json({
         success: true,
         message: "Unauthorized access",
